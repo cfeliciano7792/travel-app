@@ -7,7 +7,7 @@ const pool = new Pool({
     user: 'cs467',
     host: 'localhost',
     database: 'travel_planner_db',
-    password: 'cs467',
+    password: '',
     port: 5432,
 });
 
