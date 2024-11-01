@@ -1,0 +1,41 @@
+GET http://localhost:3000/users
+
+###
+
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "name": "OSU",
+    "password": "password"
+}
+
+###
+
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "name": "Benny",
+    "password": "password"
+}
+
+###
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "name": "OSU",
+    "password": "password"
+}
+
+### test bad password
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "name": "OSU",
+    "password": "pass"
+}
