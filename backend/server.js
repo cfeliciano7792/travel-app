@@ -1,20 +1,25 @@
-// Import express framework
-const express = require('express')
-const app = express()
+// Main server file for Express setup
+
+// Setup main server
+const express = require('express');
+const cors = require('cors');
+const usersRouter = require('./routes/users');
+const tripsRouter = require('./routes/trips');
+const experiencesRouter = require('./routes/experiences');
+const ratingsRouter = require('./routes/ratings');
 
 // Import bcrypt library to allow for hashing passwords
 const bcrypt = require('bcrypt')
 
-// Import cors middleware
-const cors = require('cors')
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-const port = 3000
-
-// Enable CORS for all routes
-app.use(cors())
-
-// automatically parse JSON data in request bodies
-app.use(express.json())
+// Register routes
+app.use('/api/users', usersRouter);
+app.use('/api/trips', tripsRouter);
+app.use('/api/experiences', experiencesRouter);
+app.use('/api/ratings', ratingsRouter);
 
 // Temp variable to hold usernames and passwords
 const users = []
@@ -67,6 +72,7 @@ app.post('/login', async (req, res) => {
     }
 })
 
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-  });
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
