@@ -1,41 +1,48 @@
-GET http://localhost:3000/users
+### Get All Users (optional, for testing or admin use)
+GET http://localhost:3000/api/users
 
 ###
 
-POST http://localhost:3000/signup
+POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-    "name": "OSU",
-    "password": "password"
+    "username": "OSU",
+    "password": "password",
+    "email": "osu@example.com",
+    "profile_picture": "link_to_image",
+    "bio": "Oregon State University"
 }
 
 ###
 
-POST http://localhost:3000/signup
+POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-    "name": "Benny",
+    "username": "Benny",
+    "password": "password",
+    "email": "benny@example.com",
+    "profile_picture": "link_to_image",
+    "bio": "OSU Mascot"
+}
+
+### Login with correct password
+
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "username": "OSU",
     "password": "password"
 }
 
-###
+### Login with incorrect password (should fail)
 
-POST http://localhost:3000/login
+POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-    "name": "OSU",
-    "password": "password"
-}
-
-### test bad password
-
-POST http://localhost:3000/login
-Content-Type: application/json
-
-{
-    "name": "OSU",
-    "password": "pass"
+    "username": "OSU",
+    "password": "wrongpassword"
 }
