@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: white;
+  text-align: center;
+}
+
+.form-container {
+  background-color: whitesmoke;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(245, 245, 245, 0.4);
+  padding: 10px 20px;
+  transition: 0.2s;
+  width: fit-content;
+  text-align: center;
+  margin: auto;
+  margin-top: 20 px;
+}
+
+h1 {
+  font-size: large;
+  text-align: center;
+  color: black;
+}
+
+input {
+  text-align: left;
+  font-size: large;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 15px;
+  border: none;
+  color: black;
+  cursor: pointer;
+  background-color: rgb(127, 216, 139);
+  width: 40%;
+  font-size: large;
+}
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 2px solid indianred;
+}
+
+.navbar h1 {
+  color: indianred;
+}
+
+.navbar .links {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 16px;
+  /* text-decoration: none; */
+  padding: 10px;
+}
+
+.navbar a:hover {
+  color: indianred;
+}
