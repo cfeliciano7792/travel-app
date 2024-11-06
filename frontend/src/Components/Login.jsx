@@ -1,12 +1,17 @@
 // code reference: https://www.youtube.com/watch?v=4pcJBQljAaQ
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate()
+
   const handleFormSubmit = (event) => {
-    alert(`password: ${password} - username: ${username}`);
+    // alert(`password: ${password} - username: ${username}`);
+    event.preventDefault();
+    navigate('/home')
   };
   return (
     <div className="form-container">
