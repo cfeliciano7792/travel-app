@@ -6,7 +6,7 @@ const SearchBarContainer = () => {
 
     return (
         
-        <div className="border-2">
+        <div className="flex flex-col items-center min-w-[200px] border-2 w-2/ mx-auto">
             <ExperiencesSearchBar />
         </div>
         
