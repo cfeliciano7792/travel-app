@@ -1,7 +1,5 @@
--- Connect to travel_planner database
-\c travel_planner_db;
+-- Create tables needed for Travel Planner
 
--- Create tables
 -- Users table
 CREATE TABLE IF NOT EXISTS Users (
     user_id SERIAL PRIMARY KEY,
@@ -25,19 +23,16 @@ CREATE TABLE IF NOT EXISTS Trips (
 CREATE TABLE IF NOT EXISTS Experiences (
     experience_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
-    title VARCHAR(150) NOT NULL,
+    title VARCHAR(150) NOT NULL CHECK (CHAR_LENGTH(title) > 0),
     description TEXT,
     photos JSONB,
-    rating NUMERIC(3, 2),
+    rating NUMERIC(3, 2) CHECK (rating >= 1 AND rating <= 5),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Ratings table
-CREATE TABLE IF NOT EXISTS Ratings (
-    rating_id SERIAL PRIMARY KEY,
-    experience_id INT REFERENCES Experiences(experience_id) ON DELETE CASCADE,
-    user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
-    rating_value INT CHECK (rating_value BETWEEN 1 AND 5),
-    review TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- TripExperiences table to associate experiences with trips
+CREATE TABLE IF NOT EXISTS TripExperiences (
+    trip_experience_id SERIAL PRIMARY KEY,
+    trip_id INT REFERENCES Trips(trip_id) ON DELETE CASCADE,
+    experience_id INT REFERENCES Experiences(experience_id) ON DELETE CASCADE
 );

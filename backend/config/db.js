@@ -1,14 +1,17 @@
-// Handle Database Connection
+// Handle Connection to Cloud PostgreSQL Database (on Render)
 
-// Create connection
+require('dotenv').config();
 const { Pool } = require('pg');
 
 const pool = new Pool({
-    user: 'cs467',
-    host: 'localhost',
-    database: 'travel_planner_db',
-    password: '',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    ssl: {
+        rejectUnauthorized: false // Necessary for SSL connections in Render
+    }
 });
 
 module.exports = pool;
