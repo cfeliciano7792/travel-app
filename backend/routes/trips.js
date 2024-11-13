@@ -8,8 +8,10 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM Trips');
+        // Return all Trips
         res.json(result.rows);
     } catch (err) {
+        // Log specific error details
         console.error("Error in /api/trips:", err);
         res.status(500).send("Server Error");
     }
