@@ -1,4 +1,5 @@
 // Main server file for Express setup
+// Connects to routes
 
 // Setup main server
 const express = require('express');
@@ -6,7 +7,7 @@ const cors = require('cors');
 const usersRouter = require('./routes/users');
 const tripsRouter = require('./routes/trips');
 const experiencesRouter = require('./routes/experiences');
-const ratingsRouter = require('./routes/ratings');
+const tripExperiencesRouter = require('./routes/tripExperiences');
 const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/experiences', experiencesRouter);
-app.use('/api/ratings', ratingsRouter);
+app.use('/api/trip-experiences', tripExperiencesRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
 
