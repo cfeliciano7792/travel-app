@@ -7,6 +7,7 @@ import viteLogo from "/vite.svg";
 import Navbar from "./Components/Navbar";
 import Login from "./Components/Login";
 import Registration from "./Components/Registration";
+import Experience from "./Components/CreateExperience";
 
 import Home from "./Pages/Home";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/createExperience" element={<Experience />} />
       </Routes>
     </BrowserRouter>
 
