@@ -36,17 +36,6 @@ input {
   border: 1px solid #ddd;
 }
 
-button {
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin: 15px;
-  border: none;
-  color: black;
-  cursor: pointer;
-  background-color: rgb(127, 216, 139);
-  width: 40%;
-  font-size: large;
-}
 .navbar {
   padding: 20px;
   display: flex;
