@@ -7,7 +7,7 @@ function ExperienceModal({onClose}){
     const closeModal = (e) => {
       if(modalRef.current === e.target){
         onClose();
-      }  
+      }
     }
 
     return (
@@ -17,26 +17,26 @@ function ExperienceModal({onClose}){
                 <div className="">
                     <h1 className="text-white">Tell us about your experience!</h1>
                     <form>
-                        <div class="grid gap-6 mb-6 md:grid-cols-2">
+                        <div className="grid gap-6 mb-6 md:grid-cols-2">
                             <div>
-                                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                                <input type="text" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Title..." required />
+                                <label for="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                                <input type="text" id="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Title..." required />
                             </div>
                             <div>
-                                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                <textarea type="textarea" id="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Description..." required />
+                                <label for="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                                <textarea type="textarea" id="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Description..." required />
                             </div>
                             <div>
-                                <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                                <input type="date" id="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" required />
-                            </div>  
-                            <div>
-                                <label for="rating" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
-                                <input type="number" id="rating" min="1" max="5" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Rating" required />
+                                <label for="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                                <input type="date" id="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" required />
                             </div>
                             <div>
-                                <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Photo</label>
-                                <input type="file" id="photo" accept="image/*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                                <label for="rating" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
+                                <input type="number" id="rating" min="1" max="5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Rating" required />
+                            </div>
+                            <div>
+                                <label for="photo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Photo</label>
+                                <input type="file" id="photo" accept="image/*" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                             </div>
                             <div>
                                 <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Location</label>

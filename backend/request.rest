@@ -46,3 +46,14 @@ Content-Type: application/json
     "username": "OSU",
     "password": "wrongpassword"
 }
+
+###
+
+POST http://localhost:5000/api/trips
+Content-Type: application/json
+
+{
+    "title": "NYC"
+}
+
+
