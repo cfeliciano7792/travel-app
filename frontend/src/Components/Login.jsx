@@ -3,31 +3,62 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleUserNameInputChange = (event) => {
+    setValues({ ...values, username: event.target.value });
+  };
+
+  const handlePasswordInputChange = (event) => {
+    setValues({ ...values, password: event.target.value });
+  };
 
   const navigate = useNavigate()
 
+  const userData = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(values)
+  }
+
   const handleFormSubmit = (event) => {
-    // alert(`password: ${password} - username: ${username}`);
     event.preventDefault();
-    navigate('/home')
-  };
+    fetch('http://localhost:5000/api/login', userData)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      if (data.ok) {
+        navigate(`/home`)
+      }
+      
+    })
+    .catch((error) => {
+      console.error("Error during login:", error.message);
+      alert(error.message); // Display the error message to the user
+    });
+  }
+
+
   return (
     <div className="form-container">
       <h1>Login Form</h1>
       <form onSubmit={handleFormSubmit}>
         {/* <label htmlFor="Log in Account">Log in Account</label> */}{" "}
         <input
-          value={username}
+          value={values.username}
           placeholder="Username"
-          onChange={(event) => setUsername(event.target.value)}
+          onChange={handleUserNameInputChange}
           required
         />{" "}
         <input
-          value={password}
+          value={values.password}
           placeholder="Password"
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={handlePasswordInputChange}
           required
         />
         <button

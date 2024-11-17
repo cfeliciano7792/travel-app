@@ -36,7 +36,6 @@ const Registration = () => {
   // ensures that when the page refreshes, the data isn't lost
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(userData)
     fetch('http://localhost:5000/api/signup', userData)
     .then(response => response.json())
     .then(data => {
@@ -44,7 +43,6 @@ const Registration = () => {
       navigate(`/home`); 
   })
     .catch(error => console.error(error));
-    
   };
 
   return (
