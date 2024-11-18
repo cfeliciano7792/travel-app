@@ -71,11 +71,11 @@ function TripModal({onClose}) {
                             </div>
                             <div>
                                 <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description:</label>
-                                <input value={values.description} type="text" id="description" className="bg-gray-50 border-emerald-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDescriptionInputChange} required />
+                                <input value={values.description} type="text" id="description" className="bg-gray-50 border-emerald-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDescriptionInputChange} />
                             </div>
                             <div>
                                 <label htmlFor="dates" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Travel Dates:</label>
-                                <input value={values.dates} type="date" id="dates" className="bg-gray-50 border-emerald-600	text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDatesInputChange} required />
+                                <input value={values.dates} type="date" id="dates" className="bg-gray-50 border-emerald-600	text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDatesInputChange} />
                             </div>
                             {/* <div>
                                 <label htmlFor="photo_upload" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Photo Upload:</label>
