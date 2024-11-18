@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import SearchContainer from "../Components/SearchContainer";
 import ExperienceModal from "../Components/ExperienceModal.jsx";
 import SearchResults from "../Components/SearchResults.jsx";
 import ExperiencesSearchBar from "../Components/ExperiencesSearchBar.jsx";
