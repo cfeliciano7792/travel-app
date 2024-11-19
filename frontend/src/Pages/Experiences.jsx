@@ -36,8 +36,8 @@ const Experiences = () => {
             <div>
                 {showModal && <ExperienceModal onClose={() => setShowModel(false)}/>}
             </div>
-            <div className=" items-center h-3/4 mx-40 max-w-2xl">
-                <SearchResults input={input} experiences={experiences}/>
+            <div className="flex justify-center items-center mx-auto">
+                <SearchResults input={input} experiences={experiences} />
             </div>
         </div>
         </>

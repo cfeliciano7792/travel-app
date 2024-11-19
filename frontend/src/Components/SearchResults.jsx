@@ -13,7 +13,7 @@ const SearchResults = ({input, experiences}) => {
       };
       
     return(
-        <div className="flexbox items-center justify-center">
+        <div>
             {filterArray()}
             {/* {experiences.map((experience) => (
                 <Experience key={experience.experience_id} data={experience} />

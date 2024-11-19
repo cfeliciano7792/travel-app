@@ -4,7 +4,7 @@ const Experience = ({experience}) => {
 
     
     return (
-        <div onClick={() => addExperienceToTrip()} className="flex flex-col border-2 border-black mt-4">
+        <div onClick={() => addExperienceToTrip()} className="flex flex-col border-2 border-black mt-4 p-4">
             {experience.title}
             <div>
             {experience.rating}/5
