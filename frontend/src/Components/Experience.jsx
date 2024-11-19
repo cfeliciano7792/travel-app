@@ -9,7 +9,7 @@ const Experience = ({experience}) => {
             <div>
             {experience.rating}/5
             </div>
-            <div className="content-start mx-auto text-left">
+            <div className="content-start mx-auto text-left line-clamp-1">
             {experience.description}
             </div>
         </div>
