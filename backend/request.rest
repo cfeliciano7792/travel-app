@@ -61,5 +61,21 @@ Content-Type: application/json
 GET http://localhost:5000/api/trips
 Content-Type: application/json
 
+###
+
+GET http://localhost:5000/api/experiences
+Content-Type: application/json
+
+###
+
+POST http://localhost:5000/api/experiences
+Content-Type: application/json
+
+{
+    "user_id": 3,
+    "title": "Grand Canyon Helicopter Tour",
+    "description": "This was such an amazing tour! Our pilot was friendly and had a lot of knowledge to share. Would absolutly recommend especially if you are not afraid of heights!!",
+    "rating": 5 
+}
 
 
