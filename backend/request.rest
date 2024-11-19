@@ -56,4 +56,10 @@ Content-Type: application/json
     "title": "NYC"
 }
 
+###
+
+GET http://localhost:5000/api/trips
+Content-Type: application/json
+
+
 
