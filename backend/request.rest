@@ -53,7 +53,8 @@ POST http://localhost:5000/api/trips
 Content-Type: application/json
 
 {
-    "title": "NYC"
+    "title": "Denver Ski Trip",
+    "user_id": 19
 }
 
 ###
@@ -77,5 +78,10 @@ Content-Type: application/json
     "description": "This was such an amazing tour! Our pilot was friendly and had a lot of knowledge to share. Would absolutly recommend especially if you are not afraid of heights!!",
     "rating": 5 
 }
+
+###
+
+GET http://localhost:5000/api/trips/user/19
+Content-Type: application/json
 
 

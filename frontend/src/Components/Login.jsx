@@ -33,7 +33,7 @@ const Login = ({setCookie}) => {
     .then(data => {
       console.log(data)
       if (data.ok) {
-        setCookie(data.userID)
+        setCookie(data.user_id)
         navigate(`/home`)
       }
       

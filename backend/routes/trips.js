@@ -17,6 +17,24 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get route to fetch trips for a specific userID
+router.get("/user/:user_id", async (req, res) => {
+    const { user_id } = req.params;
+    try {
+        const results = await pool.query(
+            `SELECT * FROM TRIPS WHERE user_id=$1`, [user_id]
+        );
+        //If no trips found return an empty array
+        if (results.rows.length === 0) {
+            return res.status(404).json({message:'No trips found for this user'});
+        }
+        res.json(results.rows);
+    } catch (err) {
+        console.error("Error in POST /api/trips/user/:userID", err);
+        res.status(500).send("Server Error");
+    }
+});
+
 // POST route to add a new trip
 router.post('/', async (req, res) => {
     const { user_id, title } = req.body;

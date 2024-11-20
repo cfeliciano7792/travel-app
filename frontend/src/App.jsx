@@ -21,8 +21,8 @@ import Cookies from "js-cookie"
 function App() {
   const [count, setCount] = useState(0);
 
-  const setCookie = async (userID) => {
-    Cookies.set('userID', userID)
+  const setCookie = async (user_id) => {
+    Cookies.set('user_id', user_id)
     console.log(Cookies.get())
   }
 

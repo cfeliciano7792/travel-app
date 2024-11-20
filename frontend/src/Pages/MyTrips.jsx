@@ -4,6 +4,8 @@ import TripModal from "../Components/TripModal";
 import TripSearchResults from "../Components/TripSearchResults";
 import TripsSearchBar from "../Components/TripSearchBar";
 
+import Cookies from 'js-cookie'
+
 
 
 const MyTrips = () => {
@@ -11,8 +13,10 @@ const MyTrips = () => {
     const [trips, setTrips] = useState([])
     const [input, setInput] = useState("")
 
+    const user_id = Cookies.get('user_id')
+
     useEffect(() => {
-        fetch("http://localhost:5000/api/trips")
+        fetch(`http://localhost:5000/api/trips/user/${user_id}`)
             .then(response => {
                 return response.json()
             })
