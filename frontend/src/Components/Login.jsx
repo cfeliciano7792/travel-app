@@ -63,6 +63,7 @@ const Login = () => {
         />
         <button
           type="submit"
+          className="text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           // style={{ backgroundColor: "lightgreen", border: "1px lightgray" }}
         >
           Submit
