@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import ExperienceModal from "../Components/ExperienceModal.jsx";
 import SearchResults from "../Components/SearchResults.jsx";
 import ExperiencesSearchBar from "../Components/ExperiencesSearchBar.jsx";
+import Navbar from "../Components/Navbar.jsx";
+
 
 const Experiences = () => {
 
@@ -27,6 +29,7 @@ const Experiences = () => {
 
     return (
         <>
+        <Navbar />
         <div className=" w-full items-center h-screen bg-gray-200">
         <h1 className="text-3xl ">Search Experiences</h1>
             <div className="flex flex-col items-center  max-w-3xl min-w-[200px] mx-auto">

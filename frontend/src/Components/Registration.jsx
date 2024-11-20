@@ -1,6 +1,6 @@
 // code reference: https://www.youtube.com/watch?v=8hU0I8rY4u4
 import { useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Registration = () => {
   const [values, setValues] = useState({
@@ -78,6 +78,7 @@ const Registration = () => {
           required
         />
         <button type="submit" className="text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+        <p>Back to <Link className="text-blue-500 underline" to="/login">login.</Link> </p>
       </form>
     </div>
   );
