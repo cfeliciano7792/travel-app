@@ -9,6 +9,7 @@ import Login from "./Components/Login";
 import Registration from "./Components/Registration";
 
 import Home from "./Pages/Home";
+import Experiences from "./Pages/Experiences";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,6 +22,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/experiences" element={<Experiences />} />
       </Routes>
     </BrowserRouter>
 
