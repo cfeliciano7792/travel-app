@@ -9,7 +9,11 @@ import MainNavbar from "./Components/MainNavbar";
 import Login from "./Components/Login";
 import Registration from "./Components/Registration";
 import Home from "./Pages/Home";
+
 import MyTrips from "./Pages/MyTrips";
+
+
+import Experiences from "./Pages/Experiences";
 
 
 function App() {
@@ -24,6 +28,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/mytrips" element={<MyTrips />} />
+        <Route path="/experiences" element={<Experiences />} />
+
       </Routes>
     </BrowserRouter>
 
