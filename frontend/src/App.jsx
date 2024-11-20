@@ -11,13 +11,20 @@ import Registration from "./Components/Registration";
 import Home from "./Pages/Home";
 
 import MyTrips from "./Pages/MyTrips";
-
-
 import Experiences from "./Pages/Experiences";
+
+import Cookies from "js-cookie"
+
+
 
 
 function App() {
   const [count, setCount] = useState(0);
+
+  const setCookie = async (userID) => {
+    Cookies.set('userID', userID)
+    console.log(Cookies.get())
+  }
 
   return (
     <BrowserRouter>
@@ -25,7 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setCookie={setCookie} />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/mytrips" element={<MyTrips />} />
         <Route path="/experiences" element={<Experiences />} />

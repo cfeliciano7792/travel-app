@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setCookie}) => {
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -33,6 +33,7 @@ const Login = () => {
     .then(data => {
       console.log(data)
       if (data.ok) {
+        setCookie(data.userID)
         navigate(`/home`)
       }
       
