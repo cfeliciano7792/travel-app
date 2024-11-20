@@ -1,6 +1,6 @@
 // code reference: https://www.youtube.com/watch?v=4pcJBQljAaQ
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -68,6 +68,7 @@ const Login = () => {
         >
           Submit
         </button>
+        <p>Ready to plan your next adventure? <Link className="text-blue-500 underline" to="/registration">Sign Up Here!</Link> </p>
       </form>
     </div>
   );
