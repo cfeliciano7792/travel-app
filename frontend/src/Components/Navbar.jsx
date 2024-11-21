@@ -1,6 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import Cookies from "js-cookie"
+
+
 const Navbar = () => {
+
+  const navigate = useNavigate();
+
+  const handleSignOut = (event) => {
+    event.preventDefault();
+    Cookies.remove('user_id'); // Remove the 'user_id' cookie
+    console.log('User signed out, cookie removed.');
+    navigate('/'); 
+  };
+
   return (
     <nav className="navbar">
       <h1>Travel Planner</h1>
@@ -15,7 +29,7 @@ const Navbar = () => {
 
             <Link to="/experiences">Experiences</Link>
 
-            <Link to="/login">Sign Out</Link>
+            <Link onClick={handleSignOut}>Sign Out</Link>
 
           </li>
         </ul>
