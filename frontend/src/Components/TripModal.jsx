@@ -11,18 +11,18 @@ function TripModal({onClose}) {
     const user_id = Cookies.get('user_id')
 
     const [values, setValues] = useState({
-        user_id: user_id,
-        tripTitle: "",
+        title: "",
+        user_id: user_id
+        
         // description: "",
         // dates: "",
-        
         // photo: "",
     });
     
 
     const handleTripTitleInputChange = (event) => {
         console.log('title added');
-        setValues({ ...values, tripTitle: event.target.value });
+        setValues({ ...values, title: event.target.value });
       };
     
     // const handleDescriptionInputChange = (event) => {
@@ -33,20 +33,22 @@ function TripModal({onClose}) {
     //     setValues({ ...values, dates: event.target.value });
     //     };
    
+    const userData = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values)
+      }
 
     // EXPERIMENTAL CODE:
     const handleTripFormSubmit = (event) => {
+        event.preventDefault();
         onClose()
         console.log(values)
         console.log('submitted form');
-        event.preventDefault();
-        // handleUserID();
-        // const trip = {user_id, values}
-        fetch('http://localhost:5000/api/trips', {
-            method: 'POST',
-            headers: {"content-type":"application/json"},
-            body: JSON.stringify(values)
-        }).then(() => {
+        fetch('http://localhost:5000/api/trips', userData)
+        .then(() => {
             console.log('new trip added');
         })
     }
@@ -60,7 +62,7 @@ function TripModal({onClose}) {
                         <div className="container mx-auto px-4 pb-4 md:grid-cols-1 bg-neutral-200 text-left	">
                             <div>
                                 <label htmlFor="trip_title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Title:</label>
-                                <input value={values.tripTitle} type="text" id="trip_title" className="bg-gray-50 border-emerald-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleTripTitleInputChange} required />
+                                <input value={values.title} type="text" id="trip_title" className="bg-gray-50 border-emerald-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleTripTitleInputChange} required />
                             </div>
                             {/* <div>
                                 <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description:</label>
