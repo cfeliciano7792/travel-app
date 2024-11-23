@@ -37,6 +37,7 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/mytrips" element={<MyTrips />} />
         <Route path="/experiences" element={<Experiences />} />
+        <Route path="/experiences/:id" element={<h1>My Experience</h1>} />
 
       </Routes>
     </BrowserRouter>

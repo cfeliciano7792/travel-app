@@ -53,7 +53,7 @@ POST http://localhost:5000/api/trips
 Content-Type: application/json
 
 {
-    "title": "Denver Ski Trip",
+    "title": "Miami",
     "user_id": 19
 }
 

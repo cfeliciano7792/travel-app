@@ -4,6 +4,7 @@ const express = require('express');
 const pool = require('../config/db');
 const router = express.Router();
 
+
 // GET route to fetch all trips
 router.get('/', async (req, res) => {
     try {
@@ -37,7 +38,9 @@ router.get("/user/:user_id", async (req, res) => {
 
 // POST route to add a new trip
 router.post('/', async (req, res) => {
+    console.log(req.body)
     const { user_id, title } = req.body;
+    
     try {
         const result = await pool.query(
             `INSERT INTO Trips (user_id, title) VALUES ($1, $2) RETURNING *`,
