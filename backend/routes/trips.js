@@ -4,52 +4,121 @@ const express = require('express');
 const pool = require('../config/db');
 const router = express.Router();
 
-
-// GET route to fetch all trips
+// Get all trips
 router.get('/', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM Trips');
-        // Return all Trips
         res.json(result.rows);
     } catch (err) {
-        // Log specific error details
-        console.error("Error in /api/trips:", err);
-        res.status(500).send("Server Error");
+        console.error('Error in GET /api/trips:', err);
+        res.status(500).send('Server Error - Get');
     }
 });
 
-// Get route to fetch trips for a specific userID
-router.get("/user/:user_id", async (req, res) => {
+// Get trips for a specific user
+router.get('/user/:user_id', async (req, res) => {
     const { user_id } = req.params;
     try {
-        const results = await pool.query(
-            `SELECT * FROM TRIPS WHERE user_id=$1`, [user_id]
-        );
-        //If no trips found return an empty array
+        const results = await pool.query('SELECT * FROM Trips WHERE user_id = $1', [user_id]);
         if (results.rows.length === 0) {
-            return res.status(404).json({message:'No trips found for this user'});
+            return res.status(404).json({ message: 'No trips found for this user' });
         }
         res.json(results.rows);
     } catch (err) {
-        console.error("Error in POST /api/trips/user/:userID", err);
-        res.status(500).send("Server Error");
+        console.error('Error in GET /api/trips/user/:user_id:', err);
+        res.status(500).send('Server Error - User Trips');
     }
 });
 
-// POST route to add a new trip
+// Add a new trip
 router.post('/', async (req, res) => {
-    console.log(req.body)
     const { user_id, title } = req.body;
-    
+
     try {
         const result = await pool.query(
-            `INSERT INTO Trips (user_id, title) VALUES ($1, $2) RETURNING *`,
+            `INSERT INTO Trips (user_id, title)
+             VALUES ($1, $2) RETURNING *`,
             [user_id, title]
         );
+        res.status(201).json(result.rows[0]);
+    } catch (err) {
+        console.error('Error in POST /api/trips:', err);
+        res.status(500).send('Server Error - Post');
+    }
+});
+
+// Update a trip
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title } = req.body;
+
+    try {
+        const result = await pool.query(
+            `UPDATE Trips
+             SET title = COALESCE($1, title)
+             WHERE trip_id = $2
+             RETURNING *`,
+            [title, id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'Trip not found' });
+        }
+
         res.json(result.rows[0]);
     } catch (err) {
-        console.error("Error in POST /api/trips:", err);
-        res.status(500).send("Server Error");
+        console.error('Error in PUT /api/trips/:id:', err);
+        res.status(500).send('Server Error - Update');
+    }
+});
+
+// Delete a trip
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await pool.query(
+            'DELETE FROM Trips WHERE trip_id = $1 RETURNING *',
+            [id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'Trip not found' });
+        }
+
+        res.json({ message: 'Trip deleted', trip: result.rows[0] });
+    } catch (err) {
+        console.error('Error in DELETE /api/trips/:id:', err);
+        res.status(500).send('Server Error - Delete');
+    }
+});
+
+// Search trips by title
+router.get('/search', async (req, res) => {
+    const { title } = req.query;
+    const filters = [];
+    const values = [];
+
+    // Add title filter if present in query
+    if (title) {
+        filters.push(`title ILIKE $${filters.length + 1}`);
+        values.push(`%${title}%`);
+    }
+
+    const whereClause = filters.length > 0 ? `WHERE ${filters.join(' AND ')}` : '';
+
+    try {
+        const query = `SELECT * FROM Trips ${whereClause}`;
+        const result = await pool.query(query, values);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'No trips found' });
+        }
+
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error in GET /api/trips/search:', err);
+        res.status(500).send('Server Error - Search');
     }
 });
 
