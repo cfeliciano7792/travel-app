@@ -12,7 +12,7 @@ function ViewExperience() {
     const user_id = Cookies.get('user_id')
 
     const location = useLocation();
-    const experienceDetails = location.state.experience
+    const experienceDetails = location.state
     console.log(experienceDetails)
     
 
