@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 
 import Cookies from "js-cookie"
@@ -9,6 +10,11 @@ function ViewExperience() {
     const [selectedTrip, setSelectedTrip] = useState("")
 
     const user_id = Cookies.get('user_id')
+
+    const location = useLocation();
+    const experienceDetails = location.state.experience
+    console.log(experienceDetails)
+    
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/trips/user/${user_id}`)
@@ -24,6 +30,8 @@ function ViewExperience() {
     let handleTripChange = (e) => {
         setSelectedTrip(e.target.value)
       }       
+
+
 
     return(
         <>
@@ -43,7 +51,10 @@ function ViewExperience() {
             </form>
         </div>
         <div>
-            <h1>{trips.title}</h1>
+            <h1 className="text-3xl mt-4">{experienceDetails.title}</h1>
+        </div>
+        <div className="mt-6">
+            {experienceDetails.description}
         </div>
         </>
     )
