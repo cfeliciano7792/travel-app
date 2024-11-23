@@ -30,7 +30,7 @@ const Experiences = () => {
     return (
         <>
         <Navbar />
-        <div className=" w-full items-center h-screen bg-gray-200">
+        <div className=" w-full items-center min-h-screen bg-gray-200">
         <h1 className="text-3xl ">Search Experiences</h1>
             <div className="flex flex-col items-center  max-w-3xl min-w-[200px] mx-auto">
             <ExperiencesSearchBar  setInput={setInput}/>

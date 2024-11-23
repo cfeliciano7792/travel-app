@@ -9,9 +9,11 @@ import MainNavbar from "./Components/MainNavbar";
 import Login from "./Components/Login";
 import Registration from "./Components/Registration";
 import Home from "./Pages/Home";
+import ViewExperience from "./Pages/ViewExperience"
 
 import MyTrips from "./Pages/MyTrips";
 import Experiences from "./Pages/Experiences";
+
 
 import Cookies from "js-cookie"
 
@@ -37,7 +39,7 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/mytrips" element={<MyTrips />} />
         <Route path="/experiences" element={<Experiences />} />
-        <Route path="/experiences/:id" element={<h1>My Experience</h1>} />
+        <Route path="/experiences/:id" element={<ViewExperience />} />
 
       </Routes>
     </BrowserRouter>
