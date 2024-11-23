@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST route to add a new experience
+
 router.post('/', async (req, res) => {
     const { user_id, title, description, rating } = req.body;
     const photos = null;

@@ -25,11 +25,6 @@ function ExperienceModal({onClose}){
         });
     };
 
-    // const handleFileChange = (e) => {
-    //     const file = e.target.files[0];
-    //     console.log("File Selected:", file); 
-    //     setFormData({ ...formData, photo: file });
-    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
