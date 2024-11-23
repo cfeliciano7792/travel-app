@@ -30,7 +30,6 @@ function ViewExperience() {
         <Navbar />
         <div>
             <form action="">
-                <label for="trips">Pick a trip:     </label>
                 <select onChange={handleTripChange}> 
                     <option value=""> -- Select a Trip -- </option>
                         {/* Mapping through each trip object in our trips array
@@ -40,8 +39,11 @@ function ViewExperience() {
                     .filter((trip) => trip.title.length > 1)
                     .map((trip) => <option value={trip.title}>{trip.title}</option>)}
                     </select>
-                <button className="mt-2 ml-10 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add to Trip</button>
+                <button type="submit" className="mt-2 ml-10 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add Experience to Trip</button>
             </form>
+        </div>
+        <div>
+            <h1>{trips.title}</h1>
         </div>
         </>
     )
