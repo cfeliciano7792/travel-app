@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import Cookies from 'js-cookie'
 
 
-function TripModal({onClose}) {
+function TripModal({onClose , trips, setTrips}) {
     // const navigate = useNavigate();
     const user_id = Cookies.get('user_id')
     
@@ -46,8 +46,11 @@ function TripModal({onClose}) {
             method: 'POST',
             headers: {"content-type":"application/json"},
             body: JSON.stringify(values)
-        }).then(() => {
-            console.log('new trip added');
+        }).then(res => res.json())
+        .then(res => {
+            console.log(res);
+            let newTrips = [...trips, res]
+            setTrips(newTrips)
         })
     }
 

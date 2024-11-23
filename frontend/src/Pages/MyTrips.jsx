@@ -35,7 +35,7 @@ const MyTrips = () => {
                 <TripsSearchBar setInput={setInput} />
             </div>
             <button onClick={() => setShowTripModal(true)} className="text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add Trip</button>
-            {showTripModal && <TripModal onClose={() => setShowTripModal(false)} />}
+            {showTripModal && <TripModal onClose={() => setShowTripModal(false)} trips={trips} setTrips={setTrips} />}
             <div className=" items-center h-3/4 mx-40 max-w-2xl">
                 <TripSearchResults input={input} trips={trips} />
             </div>
