@@ -2,29 +2,23 @@
 // Each trip has an accompanying Edit and Delete button.
 
 import React from "react";
-import Cookies from 'js-cookie'
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import EditTripModal from "./EditTripModal";
 
 
 
 const Trip = ({trip}) => {
-    const navigate = useNavigate();
-    const user_id = Cookies.get('user_id')
     const [showEditModal, setShowEditModal] = useState(false)
 
 
-
-
     const handleDeleteClick= () => {
-        // console.log('TRIP:', trip);
-        // console.log('tripID:',trip.trip_id);
+        console.log('TRIP:', trip);
+        console.log('tripID:',trip.trip_id);
         fetch('http://localhost:5000/api/trips/' + trip.trip_id, {
             method: 'DELETE'
-        }).then(() => {
-            // console.log('TRIP WAS DELETED');
-            navigate(`/mytrips`)
+        }).then((res) => {
+            console.log("RES object:", res);
+            console.log('TRIP WAS DELETED');
         })
     };
 
@@ -36,7 +30,7 @@ const Trip = ({trip}) => {
             {/* {trip.description} */}
             <button onClick={handleDeleteClick}>DELETE</button>
             <button onClick={() => setShowEditModal(true)}>EDIT</button>
-            {showEditModal && <EditTripModal onClose={() => setShowEditModal(false)} />}
+            {showEditModal && <EditTripModal onClose={() => setShowEditModal(false)} trip={trip} />}
         </div>
     )
 };
