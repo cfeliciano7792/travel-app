@@ -23,7 +23,7 @@ function ViewExperience() {
             })
             .then(data => {
                 console.log(data);
-                setTrips(data)
+                setTrips(Array.isArray(data) ? data : []);
             })
         }, []);
 

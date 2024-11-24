@@ -1,7 +1,12 @@
 import {useState, useRef} from "react";
 import { MdClose } from "react-icons/md";
 
+import Cookies from "js-cookie"
+
 function ExperienceModal({onClose}){
+
+    const user_id = Cookies.get('user_id')
+
     const [formData, setFormData] = useState({
         title: "",
         description: "",
@@ -30,7 +35,7 @@ function ExperienceModal({onClose}){
         e.preventDefault();
         
         const experienceFormData = {
-            user_id: 19, 
+            user_id: user_id, 
             title: formData.title,
             description: formData.description,
             rating: parseFloat(formData.rating).toFixed(2), 
