@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../Components/Navbar";
+import EditExperienceModal from "../Components/EditExperienceModal.jsx";
 
 import Cookies from "js-cookie"
 
 function ViewExperience() {
 
+    const [showModal, setShowModel] = useState(false)
     const [trips, setTrips] = useState([])
     const [selectedTrip, setSelectedTrip] = useState("")
 
     const user_id = Cookies.get('user_id')
 
     const location = useLocation();
-    const experienceDetails = location.state
+    const experienceDetails = location.state;
     console.log(experienceDetails)
     
 
@@ -29,7 +31,12 @@ function ViewExperience() {
 
     let handleTripChange = (e) => {
         setSelectedTrip(e.target.value)
-      }       
+      }
+      
+    const handleEditClick = () => {
+        setSelectedTrip(experienceDetails.experience_id);
+        setShowModel(true);
+    };
 
 
 
@@ -55,6 +62,10 @@ function ViewExperience() {
         </div>
         <div className="mt-6">
             {experienceDetails.description}
+        </div>
+        <div> 
+        <button className="mt-2 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" onClick={handleEditClick}>Edit Experience</button>
+        {showModal && <EditExperienceModal experienceDetails={experienceDetails}  onClose={() => setShowModel(false)}/>}
         </div>
         </>
     )

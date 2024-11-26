@@ -18,8 +18,7 @@ router.get('/', async (req, res) => {
 
 // Add a new experience
 router.post('/', async (req, res) => {
-    const { user_id, title, description, rating } = req.body;
-    const photos = null; // Placeholder for photos
+    const { user_id, title, description, photos, rating } = req.body;
 
     try {
         const result = await pool.query(
@@ -33,7 +32,6 @@ router.post('/', async (req, res) => {
         res.status(500).send('Server Error - Post');
     }
 });
-
 // Update an experience
 router.put('/:id', async (req, res) => {
     const { id } = req.params; // 'id' corresponds to 'experience_id'
@@ -60,7 +58,6 @@ router.put('/:id', async (req, res) => {
         res.status(500).send('Server Error - Update');
     }
 });
-
 // Delete an experience
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
