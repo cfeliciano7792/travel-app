@@ -1,9 +1,9 @@
-import {useState, useRef} from "react";
+import {useState, useEffect, useRef} from "react";
 import { MdClose } from "react-icons/md";
 
 import Cookies from "js-cookie"
 
-function ExperienceModal({onClose}){
+function EditExperienceModal({ experienceDetails, onClose}){
 
     const user_id = Cookies.get('user_id')
 
@@ -12,15 +12,26 @@ function ExperienceModal({onClose}){
         description: "",
         photos: null,
         rating: "",
-        // location: "",
     });
 
     const modalRef = useRef();
+
+
+    useEffect(() => {
+        setFormData({
+            title: experienceDetails?.title || "",
+            description: experienceDetails?.description || "",
+            photos: null,
+            rating: experienceDetails?.rating || "",
+        });
+    }, [experienceDetails]);
+
+
     const closeModal = (e) => {
       if(modalRef.current === e.target){
         onClose();
       }
-    }
+    }    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,6 +60,7 @@ function ExperienceModal({onClose}){
         e.preventDefault();
         
         const experienceFormData = {
+            experience_id: experienceDetails.experience_id,
             user_id: user_id, 
             title: formData.title,
             description: formData.description,
@@ -57,8 +69,8 @@ function ExperienceModal({onClose}){
         };
 
         try {
-            const response = await fetch("http://localhost:5000/api/experiences", {
-                method: "POST",
+            const response = await fetch(`http://localhost:5000/api/experiences/${experienceDetails.experience_id}`, {
+                method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(experienceFormData),
             });
@@ -97,7 +109,6 @@ function ExperienceModal({onClose}){
                                     id="title"
                                     name="title"  
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                                    placeholder="Title..." 
                                     required 
                                     value={formData.title}
                                     onChange={handleChange}
@@ -105,7 +116,8 @@ function ExperienceModal({onClose}){
                             </div>
                             <div>
                                 <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                <textarea type="textarea" id="description" name="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Description..." required                                     value={formData.description}
+                                <textarea type="textarea" id="description" name="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required                                     
+                                value={formData.description}
                                     onChange={handleChange}/>
                             </div>
                             {/* <div>
@@ -115,17 +127,19 @@ function ExperienceModal({onClose}){
                             </div> */}
                             <div>
                                 <label htmlFor="rating" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
-                                <input type="number" id="rating" name="rating" min="1" max="5" step="0.01" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Rating" required                                     value={formData.rating}
+                                <input type="number" id="rating" name="rating" min="1" max="5" step="0.01" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required                                     
+                                value={formData.rating}
                                     onChange={handleChange}/>
                             </div>
                             <div>
-                                <label for="photo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Photo</label>
+                                <label for="photos" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Photo</label>
                                 <input 
                                     type="file" 
                                     id="photos" 
                                     name="photos" 
                                     accept="image/*" 
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " 
+                                    value={formData.photos}
                                     onChange={handleFileChange}/>
                             </div>
                             {/* <div>
@@ -133,7 +147,7 @@ function ExperienceModal({onClose}){
                                 <input type="text" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 block w-full p-2.5" placeholder="Location coordinates will appear here" readonly required />
                             </div> */}
                         </div>
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit Update</button>
                     </form>
                 </div>
             </div>
@@ -141,4 +155,4 @@ function ExperienceModal({onClose}){
     )
 }
 
-export default ExperienceModal;
+export default EditExperienceModal;
