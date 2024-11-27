@@ -12,6 +12,7 @@ function ViewExperience() {
     const [selectedTrip, setSelectedTrip] = useState("")
 
     const user_id = Cookies.get('user_id')
+    console.log(user_id)
 
     const location = useLocation();
     const experienceDetails = location.state;
@@ -38,21 +39,38 @@ function ViewExperience() {
         setShowModel(true);
     };
 
-
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:5000/api/trip-experiences", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({trip_id: selectedTrip, experience_id: experienceDetails.experience_id})
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Experience added to Trip:", data);
+            } else {
+                console.error("Failed to add experience to trip");
+            }
+        } catch (err) {
+            console.error("Error linking experience to trip:", err);
+        }
+    };
 
     return(
         <>
         <Navbar />
         <div>
-            <form action="">
-                <select onChange={handleTripChange}> 
+            <form onSubmit={handleFormSubmit}>
+                <select onChange={handleTripChange} value={selectedTrip}> 
                     <option value=""> -- Select a Trip -- </option>
                         {/* Mapping through each trip object in our trips array
                         and returning an option element with the title.
                         */}
                     {trips
                     .filter((trip) => trip.title.length > 1)
-                    .map((trip) => <option value={trip.title}>{trip.title}</option>)}
+                    .map((trip) => <option value={trip.trip_id}>{trip.title}</option>)}
                     </select>
                 <button type="submit" className="mt-2 ml-10 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add Experience to Trip</button>
             </form>
