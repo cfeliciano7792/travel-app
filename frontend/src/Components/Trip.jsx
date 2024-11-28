@@ -4,6 +4,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import EditTripModal from "./EditTripModal";
+import { Link } from "react-router-dom";
 
 
 
@@ -25,6 +26,7 @@ const Trip = ({trip}) => {
     
     
     return (
+        <Link to={`/mytrips/${trip.trip_id}`} state={trip}>
         <div className="flex flex-col text-xl bg-white border-2 border-black mt-4 p-4 max-w-3xl hover:border-4 hover:shadow-2xl hover:border-blue-700">
             {trip.title}
             {/* {trip.description} */}
@@ -34,6 +36,7 @@ const Trip = ({trip}) => {
             </div>
             {showEditModal && <EditTripModal onClose={() => setShowEditModal(false)} trip={trip} />}
         </div>
+        </Link>
     )
 };
 
