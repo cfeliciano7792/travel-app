@@ -12,6 +12,7 @@ function ViewExperience() {
     const [selectedTrip, setSelectedTrip] = useState("")
 
     const user_id = Cookies.get('user_id')
+    console.log(user_id)
 
     const location = useLocation();
     const experienceDetails = location.state;
@@ -46,7 +47,7 @@ function ViewExperience() {
         <div>
             <form action="">
                 <select onChange={handleTripChange}> 
-                    <option value=""> -- Select a Trip -- </option>
+                    <option value={trips.title} key={trips.id}> -- Select a Trip -- </option>
                         {/* Mapping through each trip object in our trips array
                         and returning an option element with the title.
                         */}
@@ -64,7 +65,9 @@ function ViewExperience() {
             {experienceDetails.description}
         </div>
         <div> 
+        {experienceDetails.user_id == user_id && (
         <button className="mt-2 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" onClick={handleEditClick}>Edit Experience</button>
+        )}
         {showModal && <EditExperienceModal experienceDetails={experienceDetails}  onClose={() => setShowModel(false)}/>}
         </div>
         </>
