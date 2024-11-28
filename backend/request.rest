@@ -1,6 +1,10 @@
 ### Get All Users (optional, for testing or admin use)
 GET http://localhost:5000/api/users
 
+### 
+GET http://localhost:5000/api/trip-experiences
+
+
 ###
 
 POST http://localhost:5000/api/signup
