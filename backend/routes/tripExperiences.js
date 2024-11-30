@@ -16,6 +16,30 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get all experiences associated with a specific trip_id
+router.get('/trip/:trip_id', async (req, res) => {
+    const { trip_id } = req.params;
+
+    try {
+        const result = await pool.query(
+            `SELECT e.*
+             FROM TripExperiences te
+             INNER JOIN Experiences e ON te.experience_id = e.experience_id
+             WHERE te.trip_id = $1`,
+            [trip_id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'No experiences found for this trip' });
+        }
+
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error in GET /api/trip-experiences/trip/:trip_id:', err);
+        res.status(500).send('Server Error - Get Experiences by Trip');
+    }
+});
+
 // Add a new trip-experience connection
 router.post('/', async (req, res) => {
     const { trip_id, experience_id } = req.body;
