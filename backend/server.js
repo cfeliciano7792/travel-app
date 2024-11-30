@@ -1,7 +1,7 @@
 // Main server file for Express setup
 // Connects to routes
 
-// Setup main server
+// Setup main server routes
 const express = require('express');
 const cors = require('cors');
 const usersRouter = require('./routes/users');
@@ -14,6 +14,7 @@ const loginRouter = require('./routes/login');
 // Import bcrypt library to allow for hashing passwords
 const bcrypt = require('bcrypt')
 
+// Create the Express app
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -27,10 +28,16 @@ app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the API!');
+  res.send('Welcome to the API!');
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+// Export the app (for testing)
+module.exports = app;
+
+// Start the server only if not in test mode
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-});
+  });
+}
