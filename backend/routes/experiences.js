@@ -1,9 +1,35 @@
 // Example API route for handling Experiences
 
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 const express = require('express');
 const router = express.Router();
 const pool = require('../config/db');
 
+const uploadDir = path.join(__dirname, "../uploads/");
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        console.log(`File destination path: ${uploadDir}`);
+        cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname)
+      },
+});
+
+const uploadStorage = multer({ storage: storage })
+
+router.post("/uploads", uploadStorage.single("file"), (req, res) => {
+    if (!req.file) {
+        return res.status(400).send("No file uploaded.");
+    }
+    const filePath = `/uploads/${req.file.filename}`;
+    res.status(200).json({ filePath });
+});
 // Get all experiences
 router.get('/', async (req, res) => {
     try {
@@ -24,7 +50,7 @@ router.post('/', async (req, res) => {
         const result = await pool.query(
             `INSERT INTO Experiences (user_id, title, description, photos, rating)
              VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-            [user_id, title, description, photos, rating]
+            [user_id, title, description, photos ? JSON.stringify(photos) : JSON.stringify([]), rating]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -34,18 +60,22 @@ router.post('/', async (req, res) => {
 });
 // Update an experience
 router.put('/:id', async (req, res) => {
-    const { id } = req.params; // 'id' corresponds to 'experience_id'
-    const { title, description, rating } = req.body;
+    const { id } = req.params;
+    const { user_id, title, description, photos, rating } = req.body;
+
+    console.log("Updated photos:", photos);
 
     try {
         const result = await pool.query(
             `UPDATE Experiences
-             SET title = COALESCE($1, title),
-                 description = COALESCE($2, description),
-                 rating = COALESCE($3, rating)
-             WHERE experience_id = $4
+             SET user_id = COALESCE($1, user_id),
+                 title = COALESCE($2, title),
+                 description = COALESCE($3, description),
+                 photos = COALESCE($4::jsonb, photos),
+                 rating = COALESCE($5, rating)
+             WHERE experience_id = $6
              RETURNING *`,
-            [title, description, rating, id]
+            [user_id, title, description, photos ? JSON.stringify(photos) : JSON.stringify([]), rating, id]
         );
 
         if (result.rowCount === 0) {
@@ -58,6 +88,8 @@ router.put('/:id', async (req, res) => {
         res.status(500).send('Server Error - Update');
     }
 });
+
+
 // Delete an experience
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
