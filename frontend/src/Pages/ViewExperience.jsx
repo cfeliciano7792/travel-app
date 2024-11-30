@@ -17,6 +17,24 @@ function ViewExperience() {
     const location = useLocation();
     const experienceDetails = location.state;
     console.log(experienceDetails)
+
+    // States for upvotes, downvotes, and voting restriction
+    const [upvotes, setUpvotes] = useState(0);
+    const [downvotes, setDownvotes] = useState(0);
+    const [hasVoted, setHasVoted] = useState(false);
+
+    const voteKey = `voted_${experienceDetails.experience_id}`;
+
+    useEffect(() => {
+        // Initialize voting status and counts from localStorage
+        const voteStatus = localStorage.getItem(voteKey);
+        setHasVoted(voteStatus === "true");
+
+        // Load vote counts if stored (optional)
+        const storedCounts = JSON.parse(localStorage.getItem(`counts_${experienceDetails.experience_id}`)) || {};
+        setUpvotes(storedCounts.upvotes || 0);
+        setDownvotes(storedCounts.downvotes || 0);
+    }, [experienceDetails.experience_id, voteKey]);
     
 
     useEffect(() => {
@@ -58,10 +76,42 @@ function ViewExperience() {
         }
     };
 
+
     const photoUrl =
     experienceDetails.photos && experienceDetails.photos.length > 0
       ? `http://localhost:5000${experienceDetails.photos[0]}`
       : null;
+
+    const handleUpvote = () => {
+        if (hasVoted) {
+            alert("You have already voted!");
+            return;
+        }
+        const updatedUpvotes = upvotes + 1;
+        setUpvotes(updatedUpvotes);
+        setHasVoted(true);
+        saveVotes(updatedUpvotes, downvotes);
+    };
+
+    const handleDownvote = () => {
+        if (hasVoted) {
+            alert("You have already voted!");
+            return;
+        }
+        const updatedDownvotes = downvotes + 1;
+        setDownvotes(updatedDownvotes);
+        setHasVoted(true);
+        saveVotes(upvotes, updatedDownvotes);
+    };
+
+    const saveVotes = (updatedUpvotes, updatedDownvotes) => {
+        // Save votes and status in localStorage
+        localStorage.setItem(voteKey, "true");
+        localStorage.setItem(
+            `counts_${experienceDetails.experience_id}`,
+            JSON.stringify({ upvotes: updatedUpvotes, downvotes: updatedDownvotes })
+        );
+    };
 
     return(
         <>
@@ -107,6 +157,32 @@ function ViewExperience() {
         )}
         {showModal && <EditExperienceModal experienceDetails={experienceDetails}  onClose={() => setShowModel(false)}/>}
         </div>
+
+        {/* Voting Section */}
+        {experienceDetails.user_id != user_id && (
+        <div className="mt-4 flex justify-center items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                    <button
+                        onClick={handleUpvote}
+                        className="text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-3 py-2"
+                        disabled={hasVoted}
+                    >
+                        👍
+                    </button>
+                    <span>{upvotes} Helpful</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                    <button
+                        onClick={handleDownvote}
+                        className="text-white bg-red-500 hover:bg-red-700 font-medium rounded-lg text-sm px-3 py-2"
+                        disabled={hasVoted}
+                    >
+                        👎
+                    </button>
+                    <span>{downvotes} Unhelpful</span>
+                </div>
+            </div>
+            )}
         </>
     )
 }

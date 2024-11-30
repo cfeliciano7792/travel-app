@@ -20,7 +20,7 @@ const TripSearchResults = ({input, trips}) => {
       };
       
     return(
-        <div className="flexbox items-center justify-center">
+        <div className="flexbox items-center justify-center min-w-96">
             {filterArray()}
             {/* {experiences.map((experience) => (
                 <Experience key={experience.experience_id} data={experience} />
