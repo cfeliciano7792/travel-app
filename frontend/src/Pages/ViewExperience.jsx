@@ -77,11 +77,6 @@ function ViewExperience() {
     };
 
 
-    const photoUrl =
-    experienceDetails.photos && experienceDetails.photos.length > 0
-      ? `http://localhost:5000${experienceDetails.photos[0]}`
-      : null;
-
     const handleUpvote = () => {
         if (hasVoted) {
             alert("You have already voted!");
@@ -140,17 +135,18 @@ function ViewExperience() {
             {experienceDetails.description}
         </div>
         <div className="mt-6">
-        <h2 className="text-2xl">Photo:</h2>
-        {photoUrl ? (
-          <img
-            src={photoUrl}
-            alt="Experience"
-            className="w-full h-auto rounded-lg shadow-lg mt-4"
-          />
-        ) : (
-          <p>No photo available.</p>
-        )}
-      </div>
+            <h2 className="text-2xl">Photo:</h2>
+            {experienceDetails.photos && experienceDetails.photos.length > 0 ? (
+                <img
+                    src={`http://localhost:5000${experienceDetails.photos[0]}`}
+                    alt="Experience"
+                    className="w-full h-auto rounded-lg shadow-lg mt-4"
+                />
+            ) : (
+                <p>No photo available.</p>
+            )}
+        </div>
+
         <div> 
         {experienceDetails.user_id == user_id && (
         <button className="mt-2 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" onClick={handleEditClick}>Edit Experience</button>
