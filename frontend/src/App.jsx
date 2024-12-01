@@ -35,7 +35,7 @@ function App() {
       {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Login setCookie={setCookie} />} />
-        <Route path="/home" element={<Home />} />
+        {/* <Route path="/home" element={<Home />} /> */}
         {/* <Route path="/login" element={<Login setCookie={setCookie} />} /> */}
         <Route path="/registration" element={<Registration />} />
         <Route path="/mytrips" element={<MyTrips />} />

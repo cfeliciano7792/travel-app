@@ -35,7 +35,7 @@ const Login = ({setCookie}) => {
       console.log(data)
       if (data.ok) {
         setCookie(data.user_id)
-        navigate(`/home`)
+        navigate(`/mytrips`)
       }
       
     })
