@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Cookies from "js-cookie";
-import Experience from "../Components/Experience"; // Import the Experience component
+import Experience from "../Components/Experience";
 
 function ViewTrip() {
     const location = useLocation();
@@ -37,33 +37,26 @@ function ViewTrip() {
             })
             .catch((err) => {
                 console.error(err);
-                setError("Failed to load experiences.");
+                setError("No experiences found for this trip.");
             });
     }, [trip, navigate]);
-
-    if (error) {
-        return (
-            <>
-                <Navbar />
-                <div>Error: {error}</div>
-            </>
-        );
-    }
 
     return (
         <>
             <Navbar />
-            <div className="container mx-auto mt-8">
+            <div className="w-full items-center min-h-screen bg-gray-200 container mx-auto flex flex-col">
                 <h1 className="text-3xl font-bold mb-4">Your Saved Experiences</h1>
-                <div className="grid grid-cols-1 gap-4">
-                    {experiences.length > 0 ? (
-                        experiences.map((experience) => (
+                {error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : experiences.length === 0 ? (
+                    <p>No experiences found for this trip.</p>
+                ) : (
+                    <div className="grid grid-cols-1 gap-4">
+                        {experiences.map((experience) => (
                             <Experience key={experience.experience_id} experience={experience} />
-                        ))
-                    ) : (
-                        <p>No experiences found for this trip.</p>
-                    )}
-                </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     );
