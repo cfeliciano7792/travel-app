@@ -140,7 +140,7 @@ function ViewExperience() {
                 <img
                     src={`http://localhost:5000${experienceDetails.photos[0]}`}
                     alt="Experience"
-                    className="w-full h-auto rounded-lg shadow-lg mt-4"
+                    className="max-w-lg mx-auto h-auto rounded-lg shadow-lg mt-4"
                 />
             ) : (
                 <p>No photo available.</p>
