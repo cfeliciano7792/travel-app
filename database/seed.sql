@@ -4,26 +4,26 @@
 -- Insert sample users
 INSERT INTO Users (username, email, password_hash, profile_picture, bio)
 VALUES 
-('traveler1', 'traveler1@example.com', 'hashed_password1', 'https://example.com/pic1.jpg', 'I love traveling!'),
-('traveler2', 'traveler2@example.com', 'hashed_password2', 'https://example.com/pic2.jpg', 'Adventure seeker!'),
-('traveler3', 'traveler3@example.com', 'hashed_password3', 'https://example.com/pic3.jpg', 'Nature enthusiast!');
+('Mike Mic', 'Mike@gmail.com', '@idkai#4555', 'https://example.com/pic1.jpg', 'I love traveling!'),
+('Ben Joe', 'BJoe@gmail.com', 'p@ssw0rd', 'https://example.com/pic2.jpg', 'Adventure seeker!'),
+('Kent Clark', 'KClark@gmail.com', 'I@msUperMAN!', 'https://example.com/pic3.jpg', 'Nature enthusiast!');
 
 -- Insert sample trips
-INSERT INTO Trips (user_id, title)
+INSERT INTO Trips (user_id, title, description, trip_date)
 VALUES 
-(1, 'Summer Road Trip'),
-(2, 'Winter Adventure'),
-(3, 'European Tour');
+(1, 'Summer Road Trip', 'A journey through the western United States visiting major national parks.', '2025-06-15'),
+(2, 'Winter Adventure', 'A thrilling ski trip to the Rocky Mountains.', '2025-12-20'),
+(3, 'European Tour', 'A cultural and historical tour of Europe, including France, Italy, and Germany.', '2025-04-10');
 
 -- Insert sample experiences
-INSERT INTO Experiences (user_id, title, description, photos, rating)
+INSERT INTO Experiences (user_id, title, description, photos, location_coordinates, rating)
 VALUES 
 (1, 'Hiking in Yosemite', 'A scenic hike in Yosemite National Park with breathtaking views and wildlife.', 
-    '["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"]'::jsonb, 4.5),
+    '["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"]'::jsonb, '(37.8651, -119.5383)', 4.5),
 (2, 'Exploring the Rockies', 'An adventurous trek through the Rockies, filled with snow and amazing landscapes.', 
-    '["https://example.com/photo3.jpg", "https://example.com/photo4.jpg"]'::jsonb, 4.8),
+    '["https://example.com/photo3.jpg", "https://example.com/photo4.jpg"]'::jsonb, '(39.5501, -105.7821)', 4.8),
 (3, 'Venice Canal Tour', 'A peaceful boat ride through the iconic canals of Venice with great local stories.', 
-    '["https://example.com/photo5.jpg", "https://example.com/photo6.jpg"]'::jsonb, 4.9);
+    '["https://example.com/photo5.jpg", "https://example.com/photo6.jpg"]'::jsonb, '(45.4408, 12.3155)', 4.9);
 
 -- Insert sample trip-experience associations
 INSERT INTO TripExperiences (trip_id, experience_id)
