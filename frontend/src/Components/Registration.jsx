@@ -40,7 +40,7 @@ const Registration = () => {
     .then(response => response.json())
     .then(data => {
       console.log("Signup successful:", data);
-      navigate(`/home`); 
+      navigate(`/mytrips`); 
   })
     .catch(error => console.error(error));
   };
