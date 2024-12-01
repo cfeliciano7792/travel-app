@@ -4,6 +4,7 @@
 // Setup main server routes
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const usersRouter = require('./routes/users');
 const tripsRouter = require('./routes/trips');
 const experiencesRouter = require('./routes/experiences');
@@ -26,6 +27,8 @@ app.use('/api/experiences', experiencesRouter);
 app.use('/api/trip-experiences', tripExperiencesRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get('/', (req, res) => {
   res.send('Welcome to the API!');

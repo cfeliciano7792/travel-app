@@ -120,7 +120,7 @@ function ViewExperience() {
                         */}
                     {trips
                     .filter((trip) => trip.title.length > 1)
-                    .map((trip) => <option value={trip.trip_id}>{trip.title}</option>)}
+                    .map((trip) => <option key={trip.trip_id} value={trip.trip_id}>{trip.title}</option>)}
                     </select>
                 <button type="submit" className="mt-2 ml-10 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add Experience to Trip</button>
             </form>
