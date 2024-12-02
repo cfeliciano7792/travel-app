@@ -42,11 +42,10 @@ input {
   align-items: center;
   max-width: 600px;
   margin: 0 auto;
-  border-bottom: 2px solid indianred;
 }
 
 .navbar h1 {
-  color: indianred;
+  color: #cd5c5c;
 }
 
 .navbar .links {
