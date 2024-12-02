@@ -32,13 +32,27 @@ router.get('/user/:user_id', async (req, res) => {
 
 // Add a new trip
 router.post('/', async (req, res) => {
-    const { user_id, title } = req.body;
+    const { user_id, title, description, trip_date } = req.body;
 
     try {
         const result = await pool.query(
-            `INSERT INTO Trips (user_id, title)
-             VALUES ($1, $2) RETURNING *`,
-            [user_id, title]
+            `INSERT INTO Trips (
+                user_id,
+                title,
+                description,
+                trip_date
+             ) VALUES (
+                $1,
+                $2,
+                $3,
+                $4
+             ) RETURNING *`,
+            [
+                user_id,
+                title,
+                description || null,
+                trip_date || null,
+            ]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -50,15 +64,24 @@ router.post('/', async (req, res) => {
 // Update a trip
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { title } = req.body;
+    const { user_id, title, description, trip_date } = req.body;
 
     try {
         const result = await pool.query(
             `UPDATE Trips
-             SET title = COALESCE($1, title)
-             WHERE trip_id = $2
+             SET user_id = COALESCE($1, user_id),
+                 title = COALESCE($2, title),
+                 description = COALESCE($3, description),
+                 trip_date = COALESCE($4, trip_date)
+             WHERE trip_id = $5
              RETURNING *`,
-            [title, id]
+            [
+                user_id || null,
+                title || null,
+                description || null,
+                trip_date || null,
+                id,
+            ]
         );
 
         if (result.rowCount === 0) {

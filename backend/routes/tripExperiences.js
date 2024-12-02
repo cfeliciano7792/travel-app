@@ -48,7 +48,10 @@ router.post('/', async (req, res) => {
         const result = await pool.query(
             `INSERT INTO TripExperiences (trip_id, experience_id)
              VALUES ($1, $2) RETURNING *`,
-            [trip_id, experience_id]
+            [
+                trip_id || null,
+                experience_id || null,
+            ]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -69,7 +72,11 @@ router.put('/:id', async (req, res) => {
                  experience_id = COALESCE($2, experience_id)
              WHERE trip_experience_id = $3
              RETURNING *`,
-            [trip_id, experience_id, id]
+            [
+                trip_id || null,
+                experience_id || null,
+                id,
+            ]
         );
 
         if (result.rowCount === 0) {

@@ -44,13 +44,39 @@ router.get('/', async (req, res) => {
 
 // Add a new experience
 router.post('/', async (req, res) => {
-    const { user_id, title, description, photos, rating } = req.body;
+    const { user_id, title, description, photos, location_coordinates, rating, upvotes, downvotes } = req.body;
 
     try {
         const result = await pool.query(
-            `INSERT INTO Experiences (user_id, title, description, photos, rating)
-             VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-            [user_id, title, description, photos ? JSON.stringify(photos) : JSON.stringify([]), rating]
+            `INSERT INTO Experiences (
+                user_id,
+                title,
+                description,
+                photos,
+                location_coordinates,
+                rating,
+                upvotes,
+                downvotes
+             ) VALUES (
+                $1,
+                $2,
+                $3,
+                COALESCE($4::jsonb, '[]'::jsonb),
+                $5,
+                $6,
+                COALESCE($7, 0),
+                COALESCE($8, 0)
+             ) RETURNING *`,
+            [
+                user_id,
+                title,
+                description || null,
+                photos ? JSON.stringify(photos) : null,
+                location_coordinates || null,
+                rating || null,
+                upvotes,
+                downvotes,
+            ]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -58,12 +84,59 @@ router.post('/', async (req, res) => {
         res.status(500).send('Server Error - Post');
     }
 });
+
+// Route to increment upvote by 1 for a specified experience_id
+router.post('/:id/upvote', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await pool.query(
+            `UPDATE Experiences
+             SET upvotes = upvotes + 1
+             WHERE experience_id = $1
+             RETURNING *`,
+            [id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'Experience not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error('Error in POST /api/experiences/:id/upvote:', err);
+        res.status(500).send('Server Error - Upvote');
+    }
+});
+
+// Route to increment downvote by 1 for a specified experience_id
+router.post('/:id/downvote', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await pool.query(
+            `UPDATE Experiences
+             SET downvotes = downvotes + 1
+             WHERE experience_id = $1
+             RETURNING *`,
+            [id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'Experience not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error('Error in POST /api/experiences/:id/downvote:', err);
+        res.status(500).send('Server Error - Downvote');
+    }
+});
+
 // Update an experience
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { user_id, title, description, photos, rating } = req.body;
-
-    console.log("Updated photos:", photos);
+    const { user_id, title, description, photos, location_coordinates, rating, upvotes, downvotes } = req.body;
 
     try {
         const result = await pool.query(
@@ -72,10 +145,23 @@ router.put('/:id', async (req, res) => {
                  title = COALESCE($2, title),
                  description = COALESCE($3, description),
                  photos = COALESCE($4::jsonb, photos),
-                 rating = COALESCE($5, rating)
-             WHERE experience_id = $6
+                 location_coordinates = COALESCE($5, location_coordinates),
+                 rating = COALESCE($6, rating),
+                 upvotes = COALESCE($7, upvotes),
+                 downvotes = COALESCE($8, downvotes)
+             WHERE experience_id = $9
              RETURNING *`,
-            [user_id, title, description, photos ? JSON.stringify(photos) : JSON.stringify([]), rating, id]
+            [
+                user_id || null,
+                title || null,
+                description || null,
+                photos ? JSON.stringify(photos) : null, // Convert photos array to JSON string
+                location_coordinates || null,
+                rating || null,
+                upvotes || null,
+                downvotes || null,
+                id,
+            ]
         );
 
         if (result.rowCount === 0) {
@@ -88,7 +174,6 @@ router.put('/:id', async (req, res) => {
         res.status(500).send('Server Error - Update');
     }
 });
-
 
 // Delete an experience
 router.delete('/:id', async (req, res) => {

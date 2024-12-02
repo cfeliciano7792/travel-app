@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS Experiences (
     photos JSONB,
     location_coordinates TEXT,
     rating NUMERIC(3, 2) CHECK (rating >= 1 AND rating <= 5),
+    upvotes INT DEFAULT 0,
+    downvotes INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
