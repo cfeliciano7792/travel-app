@@ -32,7 +32,7 @@ const Trip = ({trip}) => {
     
     
     return (
-        <div className="flex flex-col text-xl bg-white border-2 border-black mt-4 p-4 max-w-3xl hover:border-4 hover:shadow-2xl hover:border-blue-700">
+        <div className="flex flex-col text-xl bg-white border-2 border-black mt-4 mb-8 p-4 max-w-3xl hover:border-4 hover:shadow-2xl hover:border-blue-700">
             {/* Restrict the Link to only wrap the title */}
             <Link to={`/mytrips/${trip.trip_id}`} state={trip}>
                 <div className="text-blue-600 hover:underline">{trip.title}

@@ -14,6 +14,7 @@ import ViewExperience from "./Pages/ViewExperience"
 import MyTrips from "./Pages/MyTrips";
 import Experiences from "./Pages/Experiences";
 import ViewTrip from "./Pages/ViewTrip";
+import Footer from "./Components/Footer";
 
 
 import Cookies from "js-cookie"
@@ -42,8 +43,8 @@ function App() {
         <Route path="/experiences" element={<Experiences />} />
         <Route path="/experiences/:id" element={<ViewExperience />} />
         <Route path="/mytrips/:id" element={<ViewTrip />} />
-
       </Routes>
+      <Footer/>
     </BrowserRouter>
 
   );
