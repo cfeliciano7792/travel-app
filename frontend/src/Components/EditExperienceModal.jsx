@@ -21,7 +21,7 @@ const uploadFile = async (file) => {
         console.log("Uploaded file path:", fileResponse);
         return fileResponse;
     } catch (error) {
-        console.error("Error uploading file:", error);
+        console.error("Error uploading file:", error); 
         throw error;
     }
 };
@@ -34,7 +34,7 @@ function EditExperienceModal({ experienceDetails, onClose}){
     const [formData, setFormData] = useState({
         title: "",
         description: "",
-        // photos: null,
+        location_coordinates : "",
         rating: "",
     });
 
@@ -47,7 +47,8 @@ function EditExperienceModal({ experienceDetails, onClose}){
         setFormData({
             title: experienceDetails?.title || "",
             description: experienceDetails?.description || "",
-            // photos: null,
+            photos: experienceDetails?.photos[0] || "",
+            location_coordinates: experienceDetails?.location_coordinates || "",
             rating: experienceDetails?.rating || "",
         });
     }, [experienceDetails]);
@@ -100,6 +101,7 @@ function EditExperienceModal({ experienceDetails, onClose}){
             title: formData.title,
             description: formData.description,
             photos: uploadedPhotos,
+            location_coordinates: formData.location_coordinates,
             rating: parseFloat(formData.rating).toFixed(2),
         };
 
@@ -189,6 +191,12 @@ function EditExperienceModal({ experienceDetails, onClose}){
                                 <label htmlFor="rating" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
                                 <input type="number" id="rating" name="rating" min="1" max="5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required                                     
                                 value={formData.rating}
+                                    onChange={handleChange}/>
+                            </div>
+                            <div>
+                                <label htmlFor="location_coordinates" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
+                                <input type="textarea" id="location_coordinates" name="location_coordinates" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required                                       
+                                value={formData.location_coordinates}
                                     onChange={handleChange}/>
                             </div>
                             <div>

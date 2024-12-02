@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../Components/Navbar";
-import TripDropdown from "../Components/TripDropdown.jsx"
+import TripDropdown from "../Components/TripDropdown.jsx";
 import EditExperienceModal from "../Components/EditExperienceModal.jsx";
+import Map from "../Components/Maps.jsx";
 
 import Cookies from "js-cookie"
 
@@ -28,7 +29,7 @@ function ViewExperience() {
     const [upvotes, setUpvotes] = useState(0);
       
     const handleEditClick = () => {
-        setSelectedTrip(experienceDetails.experience_id);
+        setExperienceDetails(experienceDetails);
         setShowModel(true);
     };
 
@@ -78,9 +79,28 @@ function ViewExperience() {
         <div>
             <h1 className="text-3xl mt-4">{Math.round(experienceDetails.rating)}/5</h1>
         </div>
-        <div className="mt-6">
-            {experienceDetails.description}
+
+        <div className="border border-gray-300 p-4 rounded-lg flex flex-wrap mt-6 gap-4 w-3/4 mx-auto">
+            {/* Description Section */}
+            <div className="flex-1">
+                <div className="text-lg font-medium mb-4">Description</div>
+                <div>{experienceDetails.description}</div>
+            </div>
+
+            {/* Location Section */}
+            <div className="flex-1">
+                <div className="text-lg font-medium mb-4">Location</div>
+                <div className="mb-2"> ( {experienceDetails.location_coordinates} )</div>
+                <div>
+                    {experienceDetails.location_coordinates && (
+                        <Map coordinates={experienceDetails.location_coordinates} />
+                    )}
+                </div>
+            </div>
         </div>
+
+
+    
         <div className="mt-6">
             <h2 className="text-2xl">Photo:</h2>
             {experienceDetails.photos && experienceDetails.photos.length > 0 ? (
