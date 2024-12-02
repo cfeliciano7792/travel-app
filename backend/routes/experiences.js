@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname)
+        cb(null, file.originalname)
       },
 });
 
@@ -177,7 +177,7 @@ router.put('/:id', async (req, res) => {
                 user_id || null,
                 title || null,
                 description || null,
-                photos ? JSON.stringify(photos) : null, // Convert photos array to JSON string
+                photos ? JSON.stringify(photos) : null, 
                 location_coordinates || null,
                 rating || null,
                 upvotes || null,
