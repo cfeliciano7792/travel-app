@@ -133,6 +133,28 @@ router.post('/:id/downvote', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    const {id} = req.params;
+
+    try{
+        const result = await pool.query(
+            `SELECT * 
+            FROM Experiences 
+            WHERE experience_id = $1`,
+            [id]
+        );
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'Experience not found' });
+        }
+
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error('Error in GET /api/experiences/:id:', err);
+        res.status(500).send('Server Error - Fetch');
+    }
+})
+
 // Update an experience
 router.put('/:id', async (req, res) => {
     const { id } = req.params;

@@ -45,7 +45,7 @@ function ViewTrip() {
         <>
             <Navbar />
             <div className="w-full items-center min-h-screen bg-gray-200 flex flex-col">
-                <h1 className="text-3xl font-bold mb-4">Your Saved Experiences</h1>
+                <h1 className="text-3xl font-bold mb-4">Your Saved Experiences for {trip.title}</h1>
                 {error ? (
                     <p className="text-red-500">{error}</p>
                 ) : experiences.length === 0 ? (

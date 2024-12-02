@@ -16,7 +16,7 @@ const Experience = ({experience}) => {
                 
                 {experience.title}
                 <div>
-                {experience.rating}/5
+                {Math.round(experience.rating)}/5
                 </div>
                 <div className="content-start mx-auto text-left line-clamp-1">
                 {experience.description}

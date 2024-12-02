@@ -7,6 +7,9 @@ GET http://localhost:5000/api/trip-experiences
 ### 
 GET http://localhost:5000/api/trip-experiences/trip/75
 
+### 
+GET http://localhost:5000/api/experiences/14
+
 
 
 
