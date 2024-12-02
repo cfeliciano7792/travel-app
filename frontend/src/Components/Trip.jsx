@@ -35,18 +35,25 @@ const Trip = ({trip}) => {
         <div className="flex flex-col text-xl bg-white border-2 border-black mt-4 p-4 max-w-3xl hover:border-4 hover:shadow-2xl hover:border-blue-700">
             {/* Restrict the Link to only wrap the title */}
             <Link to={`/mytrips/${trip.trip_id}`} state={trip}>
-                <div className="text-blue-600 hover:underline">{trip.title}</div>
+                <div className="text-blue-600 hover:underline">{trip.title}
+                </div>
             </Link>
+            <div>
+                {trip.description}
+            </div>
+            <div> 
+                {trip.trip_date}
+            </div>
             {/* Buttons */}
             <div>
                 <button
-                    className="mt-2 mx-2 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                    className="mt-2 mx-2 text-white bg-rose-500 hover:bg-rose-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                     onClick={handleDeleteClick}
                 >
                     DELETE
                 </button>
                 <button
-                    className="mt-2 text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                    className="mt-2 text-white bg-blue-300 hover:bg-blue-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                     onClick={handleEditClick}
                 >
                     EDIT
