@@ -23,7 +23,13 @@ router.post('/', async (req, res) => {
         const result = await pool.query(
             `INSERT INTO Users (username, email, password_hash, profile_picture, bio)
              VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-            [username, email, password_hash, profile_picture, bio]
+            [
+                username,
+                email,
+                password_hash,
+                profile_picture || null,
+                bio || null,
+            ]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -46,7 +52,13 @@ router.put('/:id', async (req, res) => {
                  bio = COALESCE($4, bio)
              WHERE user_id = $5
              RETURNING *`,
-            [username, email, profile_picture, bio, id]
+            [
+                username || null,
+                email || null,
+                profile_picture || null,
+                bio || null,
+                id,
+            ]
         );
 
         if (result.rowCount === 0) {

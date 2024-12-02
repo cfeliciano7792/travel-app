@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS Trips (
     trip_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
     title VARCHAR(150) NOT NULL,
+    description TEXT,
+    trip_date DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -26,7 +28,10 @@ CREATE TABLE IF NOT EXISTS Experiences (
     title VARCHAR(150) NOT NULL CHECK (CHAR_LENGTH(title) > 0),
     description TEXT,
     photos JSONB,
+    location_coordinates TEXT,
     rating NUMERIC(3, 2) CHECK (rating >= 1 AND rating <= 5),
+    upvotes INT DEFAULT 0,
+    downvotes INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
