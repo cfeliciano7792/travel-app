@@ -39,7 +39,12 @@ describe('Trips API', () => {
   });
 
   test('POST /api/trips should add a new trip', async () => {
-    const newTrip = { user_id: 1, title: 'New Trip' };
+    const newTrip = { 
+      user_id: 1, 
+      title: 'New Trip', 
+      description: 'A test description', 
+      trip_date: '2024-12-01' 
+    };
     const mockData = { trip_id: 1, ...newTrip };
   
     pool.query.mockResolvedValueOnce({ rows: [mockData] });
@@ -49,15 +54,21 @@ describe('Trips API', () => {
     expect(response.body).toEqual(mockData);
   
     // Normalize query strings
-    const normalizeQuery = (query) => query.replace(/\s+/g, ' ').trim();
+    const normalizeQuery = (query) =>
+      query.replace(/\s+/g, ' ').replace(/\s*\(\s*/g, '(').replace(/\s*\)\s*/g, ')').trim();
   
     expect(normalizeQuery(pool.query.mock.calls[0][0])).toBe(
-      normalizeQuery('INSERT INTO Trips (user_id, title) VALUES ($1, $2) RETURNING *')
+      normalizeQuery('INSERT INTO Trips (user_id, title, description, trip_date) VALUES ($1, $2, $3, $4) RETURNING *')
     );
-    expect(pool.query.mock.calls[0][1]).toEqual([newTrip.user_id, newTrip.title]);
+  
+    expect(pool.query.mock.calls[0][1]).toEqual([
+      newTrip.user_id,
+      newTrip.title,
+      newTrip.description,
+      newTrip.trip_date,
+    ]);
   });
   
-
   test('GET /api/trips/search should return filtered trips', async () => {
     const mockData = [{ trip_id: 1, user_id: 1, title: 'Search Trip' }];
     pool.query.mockResolvedValueOnce({ rows: mockData });
