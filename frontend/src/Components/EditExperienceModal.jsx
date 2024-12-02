@@ -187,7 +187,7 @@ function EditExperienceModal({ experienceDetails, onClose}){
                             </div> */}
                             <div>
                                 <label htmlFor="rating" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
-                                <input type="number" id="rating" name="rating" min="1" max="5" step="0.01" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required                                     
+                                <input type="number" id="rating" name="rating" min="1" max="5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required                                     
                                 value={formData.rating}
                                     onChange={handleChange}/>
                             </div>
