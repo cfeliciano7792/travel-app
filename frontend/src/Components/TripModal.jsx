@@ -15,7 +15,7 @@ function TripModal({onClose , trips, setTrips}) {
         user_id: user_id,
         title: "",
         description: "",
-        dates: "",
+        trip_date: "",
         
     });
     
@@ -29,7 +29,7 @@ function TripModal({onClose , trips, setTrips}) {
     };
 
     const handleDatesInputChange = (event) => {
-        setValues({ ...values, dates: event.target.value });
+        setValues({ ...values, trip_date: event.target.value });
         };
     
 
@@ -47,6 +47,7 @@ function TripModal({onClose , trips, setTrips}) {
             console.log(res);
             let newTrips = [...trips, res]
             setTrips(newTrips)
+            console.log('NEW TRIPS ARRAY:', newTrips);
         })
     }
 
@@ -67,8 +68,8 @@ function TripModal({onClose , trips, setTrips}) {
                                 <input value={values.description} type="text" id="description" className="bg-gray-50 border-emerald-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDescriptionInputChange} />
                             </div>
                             <div>
-                                <label htmlFor="dates" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Travel Dates:</label>
-                                <input value={values.dates} type="date" id="dates" className="bg-gray-50 border-emerald-600text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDatesInputChange} />
+                                <label htmlFor="trip_date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Travel Dates:</label>
+                                <input value={values.trip_date} type="date" id="dates" className="bg-gray-50 border-emerald-600text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDatesInputChange} />
                             </div>
                          
                         </div>
