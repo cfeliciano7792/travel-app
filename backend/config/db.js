@@ -1,6 +1,6 @@
 // Handle Connection to Cloud PostgreSQL Database (on Render)
 
-require('dotenv').config();
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -10,8 +10,8 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
     ssl: {
-        rejectUnauthorized: false // Necessary for SSL connections in Render
-    }
+        rejectUnauthorized: false,
+    },
 });
 
 module.exports = pool;
