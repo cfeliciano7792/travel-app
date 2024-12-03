@@ -194,7 +194,7 @@ function EditExperienceModal({ experienceDetails, onClose}){
                                     onChange={handleChange}/>
                             </div>
                             <div>
-                                <label htmlFor="location_coordinates" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
+                                <label htmlFor="location_coordinates" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coordinates</label>
                                 <input type="textarea" id="location_coordinates" name="location_coordinates" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required                                       
                                 value={formData.location_coordinates}
                                     onChange={handleChange}/>
