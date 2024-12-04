@@ -8,7 +8,7 @@ const uploadFile = async (file) => {
     formData.append("file", file); 
 
     try {
-        const response = await fetch("http://localhost:5000/api/experiences/uploads", {
+        const response = await fetch("https://travel-app-server-fkh8.onrender.com/api/experiences/uploads", {
             method: "POST",
             body: formData,
         });
@@ -106,7 +106,7 @@ function EditExperienceModal({ experienceDetails, onClose}){
         };
 
         try {
-            const response = await fetch(`http://localhost:5000/api/experiences/${experienceDetails.experience_id}`, {
+            const response = await fetch(`https://travel-app-server-fkh8.onrender.com/api/experiences/${experienceDetails.experience_id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(experienceFormData),
@@ -131,7 +131,7 @@ function EditExperienceModal({ experienceDetails, onClose}){
         }
     
         try {
-            const response = await fetch(`http://localhost:5000/api/experiences/${experienceDetails.experience_id}`, {
+            const response = await fetch(`https://travel-app-server-fkh8.onrender.com/api/experiences/${experienceDetails.experience_id}`, {
                 method: "DELETE",
             });
     

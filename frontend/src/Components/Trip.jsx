@@ -16,7 +16,7 @@ const Trip = ({trip}) => {
         e.stopPropagation();
         console.log('TRIP:', trip);
         console.log('tripID:',trip.trip_id);
-        fetch('http://localhost:5000/api/trips/' + trip.trip_id, {
+        fetch('https://travel-app-server-fkh8.onrender.com/api/trips/' + trip.trip_id, {
             method: 'DELETE'
         }).then((res) => {
             console.log("RES object:", res);

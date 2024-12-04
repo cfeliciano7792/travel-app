@@ -24,7 +24,7 @@ function ViewTrip() {
             return;
         }
 
-        fetch(`http://localhost:5000/api/trip-experiences/trip/${trip.trip_id}`)
+        fetch(`https://travel-app-server-fkh8.onrender.com/api/trip-experiences/trip/${trip.trip_id}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch trip experiences");

@@ -36,7 +36,7 @@ const Registration = () => {
   // ensures that when the page refreshes, the data isn't lost
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch('http://localhost:5000/api/signup', userData)
+    fetch('https://travel-app-server-fkh8.onrender.com/api/signup', userData)
     .then(response => response.json())
     .then(data => {
       console.log("Signup successful:", data);

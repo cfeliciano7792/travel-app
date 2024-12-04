@@ -12,7 +12,7 @@ function ViewExperience() {
     useEffect(() => {
         let url = window.location.href
         let id = url.split("/")[4]
-        fetch(`http://localhost:5000/api/experiences/${id}`)
+        fetch(`https://travel-app-server-fkh8.onrender.com/api/experiences/${id}`)
             .then(res => res.json())
             .then(experience => setExperienceDetails(experience))
         
@@ -41,7 +41,7 @@ function ViewExperience() {
 
     const handleUpvote = () => {
         
-        fetch(`http://localhost:5000/api/experiences/${experienceDetails.experience_id}/upvote`, {
+        fetch(`https://travel-app-server-fkh8.onrender.com/api/experiences/${experienceDetails.experience_id}/upvote`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
         })
@@ -56,7 +56,7 @@ function ViewExperience() {
 
 
     const handleDownvote = () => {
-        fetch(`http://localhost:5000/api/experiences/${experienceDetails.experience_id}/downvote`, {
+        fetch(`https://travel-app-server-fkh8.onrender.com/api/experiences/${experienceDetails.experience_id}/downvote`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
         })
@@ -105,7 +105,7 @@ function ViewExperience() {
             <h2 className="text-2xl">Photo:</h2>
             {experienceDetails.photos && experienceDetails.photos.length > 0 ? (
                 <img
-                    src={`http://localhost:5000${experienceDetails.photos[0]}`}
+                    src={`https://travel-app-server-fkh8.onrender.com${experienceDetails.photos[0]}`}
                     alt="Experience"
                     className="max-w-lg mx-auto h-auto rounded-lg shadow-lg mt-4"
                 />

@@ -29,7 +29,7 @@ const Login = ({setCookie}) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    fetch('http://localhost:5000/api/login', userData)
+    fetch('https://travel-app-server-fkh8.onrender.com/api/login', userData)
     .then(response => response.json())
     .then(data => {
       console.log(data)
