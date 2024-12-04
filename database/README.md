@@ -27,6 +27,8 @@ DB_HOST="dpg-csp82ol6l47c73epvjg0-a.virginia-postgres.render.com"
 DB_DATABASE="travel_planner_db_hoi8"
 DB_PASSWORD="LIgMhiHaoZi4oXO9G19GtpwisBumHwCS"
 DB_PORT=5432
+NODE_ENV=development
+PORT=5000
 ```
 Note: The ".env" file should also be added to the .gitignore in the backend folder to prevent pushing it on GIT.
 

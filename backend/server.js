@@ -13,7 +13,7 @@ const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 
 // Import bcrypt library to allow for hashing passwords
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 // Create the Express app
 const app = express();
@@ -34,13 +34,14 @@ app.get('/', (req, res) => {
   res.send('Welcome to the API!');
 });
 
-// Export the app for Firebase Functions
-module.exports = app;
+// Start the server (shared for Render and local testing)
+const PORT = process.env.PORT || 5000;
 
-// Start the server locally only if not in Firebase Functions
-if (!process.env.FUNCTIONS_EMULATOR) {
-  const PORT = process.env.PORT || 5000;
+if (process.env.NODE_ENV !== 'test') { // Prevent starting the server in a testing environment
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 }
+
+// Export the app for modularity and testing
+module.exports = app;
