@@ -1,5 +1,4 @@
 const functions = require("firebase-functions");
-const express = require("express");
 
 // Importing Express server
 const app = require("../backend/server");
