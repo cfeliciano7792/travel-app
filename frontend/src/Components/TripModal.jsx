@@ -38,7 +38,7 @@ function TripModal({onClose , trips, setTrips}) {
         console.log(values);
         console.log('submitted form');
         event.preventDefault();
-        fetch('http://localhost:5000/api/trips', {
+        fetch('https://travel-app-server-fkh8.onrender.com/api/trips', {
             method: 'POST',
             headers: {"content-type":"application/json"},
             body: JSON.stringify(values)

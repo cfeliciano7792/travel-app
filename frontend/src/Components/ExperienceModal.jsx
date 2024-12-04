@@ -8,7 +8,7 @@ const uploadFile = async (file) => {
     formData.append("file", file); 
 
     try {
-        const response = await fetch("http://localhost:5000/api/experiences/uploads", {
+        const response = await fetch("https://travel-app-server-fkh8.onrender.com/api/experiences/uploads", {
             method: "POST",
             body: formData,
         });
@@ -86,7 +86,7 @@ function ExperienceModal({onClose}){
         };
 
         try {
-            const response = await fetch("http://localhost:5000/api/experiences", {
+            const response = await fetch("https://travel-app-server-fkh8.onrender.com/api/experiences", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(experienceFormData),

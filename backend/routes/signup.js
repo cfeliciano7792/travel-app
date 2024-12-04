@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
         };
 
         // Send the data to the /api/users endpoint
-        const response = await fetch('http://localhost:5000/api/users', {
+        const response = await fetch('https://travel-app-server-fkh8.onrender.com/api/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userPayload),

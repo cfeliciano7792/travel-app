@@ -32,7 +32,7 @@ function EditTripModal({onClose, trip}) {
     const handleEditClick= (event) => {
         onClose()
         event.preventDefault();
-        fetch('http://localhost:5000/api/trips/' + trip.trip_id, {
+        fetch('https://travel-app-server-fkh8.onrender.com/api/trips/' + trip.trip_id, {
             method: 'PUT',
             headers: {"content-type":"application/json"},
             body: JSON.stringify(values)

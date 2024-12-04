@@ -17,7 +17,7 @@ const MyTrips = () => {
     const user_id = Cookies.get('user_id')
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/trips/user/${user_id}`)
+        fetch(`https://travel-app-server-fkh8.onrender.com/api/trips/user/${user_id}`)
             .then(response => {
                 return response.json()
             })

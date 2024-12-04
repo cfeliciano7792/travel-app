@@ -13,7 +13,7 @@ const Experiences = () => {
     const [input, setInput] = useState("")
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/experiences")
+        fetch("https://travel-app-server-fkh8.onrender.com/api/experiences")
             .then(response => {
                 return response.json()
             })
