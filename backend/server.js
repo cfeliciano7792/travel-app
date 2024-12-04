@@ -34,11 +34,11 @@ app.get('/', (req, res) => {
   res.send('Welcome to the API!');
 });
 
-// Export the app (for testing)
+// Export the app for Firebase Functions
 module.exports = app;
 
-// Start the server only if not in test mode
-if (process.env.NODE_ENV !== 'test') {
+// Start the server locally only if not in Firebase Functions
+if (!process.env.FUNCTIONS_EMULATOR) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

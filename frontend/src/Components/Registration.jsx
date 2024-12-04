@@ -78,7 +78,7 @@ const Registration = () => {
           required
         />
         <button type="submit" className="text-white bg-emerald-500 hover:bg-emerald-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
-        <p>Back to <Link className="text-blue-500 underline" to="/login">login.</Link> </p>
+        <p>Back to <Link className="text-blue-500 underline" to="/">login.</Link> </p>
       </form>
     </div>
   );
